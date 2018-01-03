@@ -1,0 +1,132 @@
+group 'com.uniledger'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+//buildscript {
+//    repositories {
+//        maven {
+//            url "http://maven.aliyun.com/nexus/content/groups/public"
+//        }
+//        mavenCentral()
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
+//    }
+//}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url "http://mvnrepository.com/" }
+        mavenCentral()
+        jcenter()
+    }
+}
+
+
+task showRepos {
+    doLast {
+        println "All repos:"
+        println repositories.collect { it.name }
+    }
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/dom4j/dom4j
+    compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+
+    compile group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.3.1'
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.1'
+
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+
+    // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+
+    // slf4j bridge
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.25'
+    compile group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.25'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.8.2'
+    // binding the log4j2
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-web', version: '2.8.2'
+
+//    Disruptor - Concurrent Programming Framework
+    compile group: 'com.lmax', name: 'disruptor', version: '3.3.6'
+
+    // add the lib not exist in any repository
+    //compile files('local-libs/java-crypto-conditions-2.0.0-SNAPSHOT.jar')
+    //RSA and ED25519 Dependencies
+    compile fileTree(dir: 'local-libs', include: ['*.jar'])
+    //ed25519-javas
+    compile 'net.i2p.crypto:eddsa:0.2.0'
+    // key pairs generate
+    compile group: 'com.chrylis', name: 'base58-codec', version: '1.2.0'
+// https://mvnrepository.com/artifact/com.alibaba/fastjson
+    // json序列化输出配置简单
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.32'
+
+    // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+
+    compile "joda-time:joda-time:2.2"
+    compile "commons-codec:commons-codec:1.10"
+    // okhttp for Android
+//    compile "com.squareup.okhttp3:okhttp:3.7.0"
+//    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    compile "org.apache.httpcomponents:httpclient:4.5.3"
+
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+//    spring
+    compile "org.springframework:spring-test:4.3.8.RELEASE"
+    compile "org.springframework:spring-expression:4.3.8.RELEASE"
+    compile "org.springframework:spring-core:4.3.8.RELEASE"
+    compile "org.springframework:spring-aop:4.3.8.RELEASE"
+    compile "org.springframework:spring-context:4.3.8.RELEASE"
+    compile "org.springframework:spring-context-support:4.3.8.RELEASE"
+    compile "org.springframework:spring-web:4.3.8.RELEASE"
+    compile "org.springframework:spring-webmvc:4.3.8.RELEASE"
+    compile "org.springframework:spring-beans:4.3.8.RELEASE"
+    compile "org.springframework:spring-orm:4.3.8.RELEASE"
+    compile "org.springframework:spring-jdbc:4.3.8.RELEASE"
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.10'
+
+    compile "mysql:mysql-connector-java:6.0.6"
+    compile group: 'com.alibaba', name: 'druid', version: '1.0.29'
+    // mybatis page helper
+    compile group: 'com.github.pagehelper', name: 'pagehelper', version: '5.0.2'
+
+    compile "org.mybatis:mybatis:3.4.4"
+    compile "org.mybatis:mybatis-spring:1.3.1"
+    compile "org.mybatis.generator:mybatis-generator-core:1.3.5"
+    compile "com.fasterxml.jackson.core:jackson-core:2.8.8"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.8.8"
+
+    // for proto
+    compile "com.google.code.gson:gson:2.8.0"
+    compile "com.google.protobuf:protobuf-java:3.2.0"
+    compile "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+
+    //for json
+    compile "net.sf.json-lib:json-lib:2.2.1:jdk15"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

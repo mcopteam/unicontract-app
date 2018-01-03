@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="../common/js/sea.js"  id="seajsnode" ata-config="sea-js-config.js"/>
+    seajs.config({
+        //设置路径
+        paths: {
+        'encrypt': 'https://a.alipayobjects.com/gallery'
+        },
+
+        // 设置别名，方便调用
+        alias: {
+        'underscore': 'gallery/underscore'
+        }
+    });
+    <!--<script type="text/javascript" src="../js/utils/utf8.js" ></script>-->
+    <!--<script type="text/javascript" src="../js/encrypt/base/basex.js" ></script>-->
+    <!--<script type="text/javascript" src="../js/encrypt/base/base58.js" ></script>-->
+    <!--&lt;!&ndash;<script type="text/javascript" src="../js/encrypt/ed25519/nacl-fast.js" ></script>&ndash;&gt;-->
+    <!--<script type="text/javascript" src="../js/encrypt/ed25519/nacl-fast.min.js" ></script>-->
+    <!--<script type="text/javascript" src="../js/utils/encrypt-ed25519.js" ></script>-->
+    <!--<script type="text/javascript" src="../js/jquery/jquery-3.2.1.js" ></script>-->
+    <!--<script type="text/javascript" src="../js/utils/json-utils.js" ></script>-->
+    <!--<script type="text/javascript" src="../js/utils/contract-utils.js" ></script>-->
+
+    <!--<script type="text/javascript" src="../js/encrypt/sha/sha3.js" ></script>-->
+    <!--<script type="text/javascript" src="../js/utils/moment.js" ></script>-->
+    <meta charset="UTF-8">
+    <title>ed25519 test</title>
+</head>
+<body>
+<h2 style="color: blue;">Ed25519 + Base58 for keypairs</h2>
+<table>
+    <tbody>
+    <tr style="text-align: left;">
+        <th>Public&nbsp;&nbsp;Key</th>
+        <td><input type="text" id="gen_public_key" style="width:100%;" maxlength="64;" value=""></td>
+        <td>len</td>
+        <td><input type="text" id="gen_public_key_len" size="3" disabled="true" align="center"/></td>
+        <td rowspan="2" style="padding-left: 10px;font-size: 16px; height: 20px;">
+            <input type="button" id="generate_keyPair" name="Generate KeyPair" value="KeyPair"/>
+        </td>
+    </tr>
+    <tr style="text-align: left;">
+        <th>Private Key</th>
+        <td><input type="text" id="gen_private_key" size="48;" maxlength="64;" value=""></td>
+        <td>len</td>
+        <td><input type="text" id="gen_private_key_len" size="3" disabled="true" align="left"/></td>
+    </tr>
+    <tr style="text-align: left;">
+        <th>msg</th>
+        <td colspan="3">
+						<textarea id="msg" style="width: 100%; min-height: 100px;text-align: left;"
+                                  autofocus placeholder="input your message here">
+						</textarea>
+        </td>
+        <td style="padding-left: 10px;font-size: 16px; height: 20px;">
+            <input type="button" id="sign_msg" name="Sign msg" value="Sign msg"/>
+        </td>
+    </tr>
+    <tr style="text-align: left;">
+        <th>msg sig</th>
+        <td colspan="3">
+						<textarea id="msg_sig" style="width: 100%; min-height: 100px;color:blue; ">
+						</textarea>
+        </td>
+        <!--<td><input type="text" id="msg_sig" size="48;" maxlength="64;" value=""></td>-->
+    </tr>
+    <tr style="text-align: left;">
+        <th>console</th>
+        <td colspan="3">
+            <input type="button" id="console_test" name="console_test" value="console for test output"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+<script>
+    var btn_keyPair = document.getElementById("generate_keyPair");
+    var gen_public_key = document.getElementById("gen_public_key");
+    var gen_public_key_len = document.getElementById("gen_public_key_len");
+    var gen_private_key = document.getElementById("gen_private_key");
+    var gen_private_key_len = document.getElementById("gen_private_key_len");
+    var msg = document.getElementById("msg");
+    var btn_sign_msg = document.getElementById("sign_msg");
+    var msg_sig = document.getElementById("msg_sig");
+
+    $(function(){
+        //$("#loaddata").click(function(){
+        $(document).ready(function(){
+            //使用getJSON方法读取json数据,
+            //注意：info.json可以是不同类型文件，只要其中的数据为json类型即可
+//		json_filename = "contract_with_one_signatures.json";
+//		json_filename = "contract_with_one_signatures_pretty.json";
+//		json_filename = "contract_with_full_signatures.json";
+//		json_filename = "contract_with_full_signatures_pretty.json";
+//		json_filename = "contract_without_signatures.json";
+            json_filename = "fixed_contract.json";
+//		json_filename = "test2.json";
+//		json_filename = "test1.json";
+//		json_filename = "xmlcontract_without_signatures.json";
+//		json_filename = "fromxmlcontract.json";
+//		json_filename = "fromxmlcontract2.json";
+//		json_filename = "contract_without_signatures_pretty.json";
+            url_file = "http://uni-ledger.oss-cn-beijing.aliyuncs.com/test_contract_app/" + json_filename;
+            $.getJSON(url_file,function(data){
+                console.log("%c-----------------  load keyPairs -------------------------", 'color:red;');
+                var keyPairsList =[];
+                keyPairsList['3FyHdZVX4adfSSTg7rZDPMzqzM8k5fkpu43vbRLvEXLJ'] = '5Pv7F7g9BvNDEMdb8HV5aLHpNTNkxVpNqnLTQ58Z5heC';
+                keyPairsList['BbfY4Dc5s8dTP1Z1yixnetezRKYREHqwbP8GQGh3WyVS'] = '6hXsHQ4fdWQ9UY1XkBYCYRouAagRW8rXxYSLgpveQNYY';
+                console.log(keyPairsList);
+                console.log("%c-----------------  load json -------------------------", 'color:red;');
+                console.log(data)
+                //  don`t modify the original data, so clone it use json stringify
+                var contract = JSON.parse(JSON.stringify(data));
+                console.log("%c-----------------  load json remove the id and contractHead -------------------------", 'color:red;');
+                delete data['ContractHead']
+                delete data['id']
+//			console.log(JSON.stringify(data))
+
+                console.log("%c-----------------  verify the ContractSignatures -------------------------", 'color:red;');
+                var verifyContractPass = ContractUtils.verifySignature(contract);
+                console.log("%c-----------------  verify the ContractSignatures pass", 'color:blue;', verifyContractPass);
+                if(!verifyContractPass){
+                    console.log("verifyContractPass failed!")
+                    return;
+                }
+
+                console.log("%c-----------------  sign for the ContractSignatures -------------------------", 'color:red;');
+                console.log("%c-----------------  sign with ", 'color:blue;', keyPairsList['BbfY4Dc5s8dTP1Z1yixnetezRKYREHqwbP8GQGh3WyVS']);
+                ContractUtils.sign(contract, "BbfY4Dc5s8dTP1Z1yixnetezRKYREHqwbP8GQGh3WyVS",
+                    keyPairsList['BbfY4Dc5s8dTP1Z1yixnetezRKYREHqwbP8GQGh3WyVS'])
+                console.log("%c-----------------  sign with ", 'color:blue;', keyPairsList['3FyHdZVX4adfSSTg7rZDPMzqzM8k5fkpu43vbRLvEXLJ']);
+                ContractUtils.sign(contract, "3FyHdZVX4adfSSTg7rZDPMzqzM8k5fkpu43vbRLvEXLJ",
+                    keyPairsList['3FyHdZVX4adfSSTg7rZDPMzqzM8k5fkpu43vbRLvEXLJ'])
+//			console.log("%c-----------------  sign with ", 'color:blue;', keyPairsList['BbfY4Dc5s8dTP1Z1yixnetezRKYREHqwbP8GQGh3WyVS']);
+                ContractUtils.sign(contract, "BbfY4Dc5s8dTP1Z1yixnetezRKYREHqwbP8GQGh3WyVS",
+                    keyPairsList['BbfY4Dc5s8dTP1Z1yixnetezRKYREHqwbP8GQGh3WyVS'])
+                console.log("%c-----------------  after the sign for the ContractSignatures -------------------------", 'color:blue;');
+                console.log(contract);
+                console.log(JSON.stringify(JsonUtils.sortKeys(contract)));
+
+                console.log("%c-----------------  generate hashId for contract(serialize by sort keys in alphabet order.) -------------------------", 'color:red;');
+                var hashId = ContractUtils.hash(contract);
+                contract["id"] = hashId;
+                console.log(hashId);
+                console.log("%c-----------------  full ContractHead -------------------------", 'color:red;');
+                console.log(contract)
+                console.log("%c-----------------  export contract -------------------------", 'color:red;');
+                console.log(JSON.stringify(JsonUtils.sortKeys(contract)))
+            });
+
+        });
+    });
+
+    window.onload = function(){
+        var default_public_key  = "3FyHdZVX4adfSSTg7rZDPMzqzM8k5fkpu43vbRLvEXLJ";
+        var default_private_key = "5Pv7F7g9BvNDEMdb8HV5aLHpNTNkxVpNqnLTQ58Z5heC";
+        gen_public_key.value = default_public_key;
+        gen_public_key_len.value = default_public_key.length;
+        gen_private_key.value = default_private_key;
+        gen_private_key_len.value = default_private_key.length;
+    };
+
+    btn_keyPair.onclick = function(){
+        var keyPair = EncryptUtils.generateKeyPair();
+        var keyPair_publicKey = keyPair.publicKey;
+        var keyPair_privateKey = keyPair.privateKey;
+        gen_public_key.value = keyPair_publicKey;
+        gen_public_key_len.value = keyPair_publicKey.length;
+        gen_private_key.value = keyPair_privateKey;
+        gen_private_key_len.value = keyPair_privateKey.length;
+
+    };
+
+    btn_sign_msg.onclick = function(){
+//		var pub = gen_public_key.value;
+        var pri = gen_private_key.value;
+        var msgVal = msg.value;
+        msgVal = msgVal.trim();
+        var factual_sig = EncryptUtils.sign(pri, msgVal);
+        msg_sig.value = factual_sig;
+    };
+
+    var btn_console_test = document.getElementById("console_test");
+    console_test.onclick = function(){
+        default_test_output();
+    }
+
+    // console output for test
+    function default_test_output(){
+        /*------------------ 1. Test generateKeyPair---------------------*/
+        console.log("%c----------------- 1. Test generateKeyPair -------------------------", 'color:red;')
+        var keyPair = EncryptUtils.generateKeyPair();
+        var keyPair_publicKey = keyPair.publicKey;
+        var keyPair_secretKey = keyPair.privateKey;
+        console.log('%ckeyPair:%o', 'color:blue;',keyPair); //keyPair
+        console.log('%cpublicKey :\t[%s]\tlen=%d', 'color:blue;font-size:14px;', keyPair_publicKey, keyPair_publicKey.length);
+        console.log('%cprivateKey:\t[%s]\tlen=%d', 'color:blue;font-size:14px;', keyPair_secretKey, keyPair_secretKey.length);
+
+        /*------------------ 2. Test sign---------------------*/
+        console.log("%c----------------- 2. Test sign -------------------------", 'color:red;')
+        var default_public_key  = "3FyHdZVX4adfSSTg7rZDPMzqzM8k5fkpu43vbRLvEXLJ";
+        var default_private_key = "5Pv7F7g9BvNDEMdb8HV5aLHpNTNkxVpNqnLTQ58Z5heC";
+        var default_msg = "hello futurever 2017";
+        var expect_sig  = "2tvX1QqcuDdrjVxuntNkMN2ULkQWtdaUkFDY6gjzmTVKYSQuVgmqh23xvAMGbMJAnFfVuNL5jQ8GX1E8KVSVWwj8";
+        var factual_sig = EncryptUtils.sign(default_private_key, default_msg);
+        console.log("%c----------- test sign with parameters as follow:", 'color:green;')
+        console.log('%cpublicKey :\t[%s]\tlen=%d', 'color:blue;font-size:14px;', default_public_key, default_public_key.length);
+        console.log('%cprivateKey:\t[%s]\tlen=%d', 'color:blue;font-size:14px;', default_private_key, default_private_key.length);
+        console.log("%cmsg:\n%s",'color:red;font-size:14px;', default_msg);
+        console.log("%cexpect sig is\t[%s]", 'color:blue;font-size:14px;', expect_sig)
+        console.log("%cfactual sig is\t[%s]", 'color:blue;font-size:14px;', factual_sig)
+        if (factual_sig == expect_sig){
+            console.log("%csign test success!", 'color:green;font-size:14px;');
+        }else{
+            console.log("%csign test failure!", 'color:red;font-size:14px;');
+        }
+
+        /*------------------ 3. Test verify---------------------*/
+        console.log("%c----------------- 3. Test verify -------------------------", 'color:red;')
+        // default_public_key = "3FyHdZVX4adfSSTg7rZDPMzqzM8k5fkpu43vbRLvEXLJ"
+        // default_private_key = "5Pv7F7g9BvNDEMdb8HV5aLHpNTNkxVpNqnLTQ58Z5heC"
+        var verify_public_key = default_public_key;
+        var verify_public_key_fake = "AZfjdKxEr9G3NwdAkco22nN8PfgQvCr5TDPK1tqsGZrk";
+        // expect_sig = "2tvX1QqcuDdrjVxuntNkMN2ULkQWtdaUkFDY6gjzmTVKYSQuVgmqh23xvAMGbMJAnFfVuNL5jQ8GX1E8KVSVWwj8"
+        var verify_sig = expect_sig;
+        // default_msg = "hello futurever 2017"
+        var verify_msg = default_msg;
+        //	var verify_private_key = default_private_key;
+        var verify_result = EncryptUtils.verify(verify_msg, verify_sig, verify_public_key);
+        var verify_result_fake = EncryptUtils.verify(verify_msg, verify_sig, verify_public_key_fake);
+        console.log("%c verify <%s>\twith public key [%s]", 'color:blue;font-size:14px;', verify_result, verify_public_key)
+        console.log("%c verify <%s>\twith public key [%s]", 'color:blue;font-size:14px;', verify_result_fake, verify_public_key_fake)
+    }
+
+</script>

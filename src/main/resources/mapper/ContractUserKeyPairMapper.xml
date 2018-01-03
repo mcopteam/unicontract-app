@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uniledger.contract.dao.ContractUserKeyPairMapper">
+    <resultMap id="contractUserKeyPairMap" type="com.uniledger.contract.model.ContractUserKeyPair">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="pubkey" column="pubkey" jdbcType="VARCHAR"/>
+        <result property="prikey" column="prikey" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"   javaType="java.util.Date"/>
+        <result property="createUserName" column="create_user_name"  jdbcType="VARCHAR" />
+        <result property="updateTime" column="update_time"  jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="updateUserName" column="update_user_name"  jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insert" parameterType="ContractUserKeyPair" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO contract_user_keypair(user_id, pubkey, prikey, status, create_user_id, create_user_name, create_time)
+        VALUES(#{userId}, #{pubkey}, #{prikey}, #{status}, #{createUserId}, #{createUserName, jdbcType=TIMESTAMP}, #{createTime, jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="activeKey" >
+        UPDATE contract_user_keypair
+        <trim prefix="set" suffixOverrides=",">
+            <if test="updateTime !=null">update_time=#{updateTime,jdbcType=TIMESTAMP},</if>
+            <if test="updateUserId !=null">update_user_id=#{updateUserId},</if>
+            <if test='updateUserName!=null and ""!=updateUserName'>update_user_name=#{updateUserName},</if>
+           status = (case when id=#{id} then 2 ELSE 1 end),
+        </trim>
+        where user_id=#{userId} and (status=2 or id=#{id})
+    </update>
+    <select id="getContractKeyPairById" resultMap="contractUserKeyPairMap">
+        SELECT * FROM contract_user_keypair WHERE id =#{id}
+    </select>
+    
+    <select id="getContractKeyPairListByUserIdAndStatus" resultMap="contractUserKeyPairMap">
+        SELECT * FROM  contract_user_keypair
+        <where>
+            <if test="userId != null">AND user_id = #{userId}</if>
+            <if test="status != null">AND status = #{status}</if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="ContractUserKeyPair">
+        UPDATE contract_user_keypair
+        <trim prefix="set" suffixOverrides=",">
+            <if test="updateTime !=null">update_time=#{updateTime},</if>
+            <if test="updateUserId !=null">update_user_id=#{updateUserId},</if>
+            <if test='updateUserName!=null and ""!=updateUserName'>update_user_name=#{updateUserName},</if>
+            <if test="status!=null">status=#{status},</if>
+        </trim>
+        WHERE id =#{id}
+    </update>
+    
+</mapper>

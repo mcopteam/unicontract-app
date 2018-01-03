@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uniledger.contract.dao.ContractAuditLogMapper">
+    <resultMap id="contractAuditLog" type="com.uniledger.contract.model.ContractAuditLog">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="contractPK" column="contract_pk" jdbcType="BIGINT"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="status" column="status" javaType="SHORT"/>
+        <result property="other" column="other" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="createUserName" column="create_user_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="ContractUserKeyPair" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO contract_audit_log (contract_pk, description, status, other, create_user_id, create_user_name, create_time, is_show)
+        VALUES (#{contractPK}, #{description, jdbcType=VARCHAR},
+                #{status, jdbcType=TINYINT},
+                #{other, jdbcType=VARCHAR}, #{createUserId},
+                #{createUserName, jdbcType=TIMESTAMP},
+                #{createTime, jdbcType=TIMESTAMP}, #{isShow,jdbcType=BOOLEAN})
+    </insert>
+
+    <select id="getContractAuditLogs" resultMap="contractAuditLog">
+        SELECT * FROM contract_audit_log
+        <where>
+            <if test="id != null">
+                AND id =#{id}
+            </if>
+            <if test="contractPK != null">
+                AND contract_pk =#{contractPK}
+            </if>
+            <if test='description != null and ""!=description'>
+                AND description like "%"#{description}"%"
+            </if>
+            <if test="isShow">
+                AND is_show=#{isShow}
+            </if>
+        </where>
+    </select>
+
+</mapper>

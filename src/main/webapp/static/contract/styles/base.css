@@ -1,0 +1,377 @@
+* {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tabs {
+	width: 30px;
+	height: 50px;
+	z-index: 9999;
+	position: absolute;
+	left: 0;
+	top: 40px;
+}
+
+.tabs li {
+	font-size: 16px;
+	text-align: center;
+	background: #f90;
+	width: 30px;
+	display: block;
+	cursor: pointer;
+}
+
+.tabs li:nth-child(2) {
+	margin-top: 10px;
+}
+
+.tabs li:nth-child(3) {
+	margin-top: 10px;
+}
+
+.tabs .cur,.addMenu .cur,
+.con_list .cur {
+	background: #337ab7;
+}
+
+.nav {
+	height: 40px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	/*background: #999;*/
+}
+
+.nav li {
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	margin: 0 10px;
+	cursor: pointer;
+}
+
+.manage {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	position: absolute;
+	left: 30px;
+	top: 40px;
+	z-index: 99999;
+	overflow: hidden;
+	display: none;
+}
+
+.con,
+.con2 {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.con_l {
+	border-right: 2px solid #d1c0d8;
+	position: relative;
+	padding: 20px;
+	float: left;
+	width: 60%;
+	height: 100%;
+}
+
+.con_r {
+	padding: 20px;
+	float: left;
+	width: 40%;
+	height: 100%;
+}
+
+.page,
+.page2,
+.page3,
+.page4 {
+	overflow: auto;
+	padding: 15px;
+	width: 90%;
+	height: 400px;
+	margin-left: 20px;
+	margin-top: 20px;
+	border: 1px solid #666;
+}
+.page4{
+	padding: 40px 0 0 40px;
+	display: none;
+}
+.con_tab ul {
+	margin: 0;
+}
+
+.con_tab ul {
+	height: 30px;
+	border-bottom: 2px solid #9397a0;
+}
+
+.con_tab ul li {
+	float: left;
+	width: 80px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.manage table {
+	border: none;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.manage td,
+.manage th {
+	font-size: 18px;
+	border: none;
+	width: 20%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.con2 td,
+.con2 th {
+	width: 10%;
+}
+
+.con2 td:nth-child(3),
+.con2 th:nth-child(3) {
+	width: 15%;
+}
+
+.con2 td:nth-child(5),
+.con2 th:nth-child(5) {
+	width: 15%;
+}
+
+.manage td {
+	font-size: 16px;
+}
+
+.export {
+	position: absolute;
+	right: 10px;
+	top: 500px;
+}
+
+.btns {
+	width: 100%;
+}
+
+.btn_l {
+	float: left;
+}
+
+.btn_r {
+	float: right;
+}
+
+.p_con {
+	overflow: auto;
+}
+
+.p_con h2 {
+	text-align: center;
+}
+
+.page .p_con p {
+	text-indent: 2em;
+}
+
+.page_btn {
+	margin-top: 40px;
+	text-align: center;
+}
+
+.page_btn input {
+	margin: 20px;
+}
+.page p,.page3 p{
+	margin-bottom: 10px;
+}
+.page,
+.page2,
+.page3 {
+	height: 400px;
+}
+
+.page2 {
+	display: none;
+}
+
+.con2 {
+	display: none;
+}
+
+.page2 p ,.page4 p {
+	margin: 0;
+}
+
+.last button {
+	margin: 10px 60px 0;
+	display: block;
+	text-align: center;
+}
+
+.personal li a {
+	padding: 10px;
+}
+
+.key {
+	text-align: center;
+}
+
+.con_nav {
+	width: 100%;
+}
+
+.con_nav>li{
+	float: right;
+}.con_nav>li:nth-child(1){
+	float: left;
+}
+
+.con_nav a {
+	color: #000;
+}
+
+.badge {
+	background-color: #e60202;
+}
+
+.glyphicon-search {
+	cursor: pointer;
+}
+
+.file_body {
+	padding: 30px;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	position: absolute;
+	left: 30px;
+	top: 40px;
+	z-index: 99999;
+	overflow: hidden;
+	display: block;
+}
+
+.file_body table {
+	margin-left: 10px;
+}
+
+.file_body td,
+.file_body th {
+	text-align: center;
+	font-size: 16px;
+	height: 30px;
+	width: 200px;
+}
+.properties td textarea{
+	width: 90% !important;
+}
+.geDialog div:nth-child(2)  button{
+	width: 168px !important;
+}
+.geDialog div:nth-child(3) {
+	margin-right: 31px;
+}
+.geDialog{
+	padding: 10px !important;
+	width: 420px !important;
+}
+body{
+	background: #ccc;
+}
+
+hr{
+	border-color: #333;
+}
+
+.con3{
+	/*display: none;*/
+	width: 600px;
+	height: 500px;
+	margin: 50px auto;
+	z-index: 999999;
+}
+.c{
+	text-align: center;
+}
+.tables{
+	margin: 10px auto;
+}
+.tables th,.tables td{
+	width: 80px;
+	text-align: center;
+}
+.page_title{
+	margin-top: 10px;
+}
+.page_p{
+	text-align: left;
+}.page_p p{
+	text-indent: 2em;
+}
+.problem{
+	width: 100%;
+}
+.problem th,.problem td{
+	text-align: center;
+	width: 50%;
+}
+.geDialog{
+	z-index: 9999999 !important;
+}
+.geMenubarContainer{
+	display: none;
+}
+
+.addMenu{
+	margin-left: 20px;	
+	width: 100%;
+	overflow: hidden;
+	border-bottom: 2px solid #000066;
+}
+	
+.addMenu li{
+	text-align: center;
+	line-height: 30px;
+	width: 80px;
+	height: 30px;
+	background: blueviolet;
+	/*margin: 5px 10px;*/
+	float: left;
+}
+.topMenu{
+	position: absolute;
+	top: 6px;
+	left: -12px;
+}
+.topMenu ul li{
+	float: left;
+	margin: 0 20px;
+}
+.geToolbarContainer{
+	top: 44px !important;
+}
+.geSidebarContainer{
+	top: 78px !important;
+}
+
+div.geSidebarContainer {
+	width: 300px !important;
+}
+.geHsplit{
+	top: 78px !important;
+}
+.geSidebar input{
+	width: 67% !important;
+}

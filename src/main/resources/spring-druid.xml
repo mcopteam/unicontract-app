@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd ">
+
+    <!-- 该包下的类支持注解，表示会被当作{@code mybatis mapper}处理 配置了之后表示可以自动引入mapper类-->
+    <mybatis:scan base-package="com.uniledger.contract.dao"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置druid数据源 -->
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <!-- 数据库连接基础信息 -->
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+
+        <!-- 验证数据库连接有效性，要求查询语句 -->
+        <property name="validationQuery" value="${validationQuery}"/>
+        <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
+        <property name="testWhileIdle" value="true"/>
+        <!-- 申请连接时执行validationQuery检测连接是否有效，配置true会降低性能。 -->
+        <property name="testOnBorrow" value="false"/>
+        <!-- 归还连接时执行validationQuery检测连接是否有效，配置true会降低性能 -->
+        <property name="testOnReturn" value="false"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="25200000"/>
+
+        <!-- 对于长时间不使用的连接强制关闭 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- 关闭超过30分钟的空闲连接，1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="1800"/>
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true"/>
+
+        <!-- ******重要的配置：监控统计拦截的filters,日志记录 *start* ******-->
+        <!-- 并在filters属性中配置了log4j，ref中的bean是下面拦截器的配置 -->
+        <!-- proxyFilters和filters是组合关系,前者是根据bean配置,后者根据别名配置的-->
+        <!-- stat是statfilter的别名,log4j是logFilter的别名-->
+        <!-- 监控统计拦截的filters,日志记录,这里开启了stat,wall（sql翻过墙过滤监控）,log4j（log4j的监控）配置 -->
+        <!--<property name="proxyFilters">-->
+            <!--<list>-->
+                <!--<ref bean="statfilter"/>-->
+                <!--&lt;!&ndash;<ref bean="logFilter"/>&ndash;&gt;-->
+            <!--</list>-->
+        <!--</property>-->
+        <!-- 监控数据库 -->
+        <!-- <property name="filters" value="mergeStat" /> -->
+        <!--<property name="filters" value="stat,wall,log4j" />-->
+        <!--<property name="filters" value="stat"/>-->
+        <!-- 不然无法显示SQL检测信息。-->
+    </bean>
+
+    <!-- 慢SQL记录 *start* -->
+    <!--<bean id="statfilter" class="com.alibaba.druid.filter.stat.StatFilter">-->
+        <!--&lt;!&ndash; 开启合并sql &ndash;&gt;-->
+        <!--<property name="mergeSql" value="true"/>-->
+        <!--&lt;!&ndash; 开启慢查询语句,1秒 &ndash;&gt;-->
+        <!--<property name="slowSqlMillis" value="1000"/>-->
+        <!--<property name="logSlowSql" value="true"/>-->
+    <!--</bean>-->
+    <!--<bean id="logFilter" class="com.alibaba.druid.filter.logging.Log4jFilter">-->
+         <!--<property name="resultSetLogEnabled" value="false" />-->
+         <!--<property name="statementExecutableSqlLogEnable" value="true" />-->
+    <!--</bean>-->
+    <!-- 慢SQL记录  *end* -->
+    <!-- ========================================================-->
+    <!-- 事务增强，这里用的是spring提供的特性-->
+    <tx:advice id="advice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="show*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="has*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="count*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="search*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="page*" propagation="SUPPORTS" read-only="true" />
+
+            <tx:method name="remove*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
+            <tx:method name="add*" propagation="REQUIRED" read-only="false"  rollback-for="java.lang.RuntimeException" />
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.RuntimeException" />
+            <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.RuntimeException" />
+            <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+            <tx:method name="publish*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 3.配置SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置MyBaties全局配置文件:spring-mybatis.xml -->
+        <!--引用别名配置文件，在mapper配置文件里引用时，就可以直接使用别名  -->
+        <property name="configLocation" value="classpath:spring-mybatis.xml"/>
+        <!-- 扫描model包 使用别名 -->
+        <property name="typeAliasesPackage" value="com.uniledger.contract.model"/>
+        <!-- 扫描sql配置文件:mapper需要的xml文件 -->
+        <!-- 自动扫描mapping目录, 省掉mybatis-config.xml里的手工配置 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--<property name="mapperLocations" value="classpath:com/uniledger/contract/dao/*.xml"/>-->
+    </bean>
+
+    <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+    <!-- 使用mapper接口的时候扫描 -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--&lt;!&ndash; 给出需要扫描Dao接口包 &ndash;&gt;-->
+        <!--<property name="basePackage" value="com.uniledger.contract.dao"/>-->
+        <!--&lt;!&ndash; 注入sqlSessionFactory &ndash;&gt;-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <!-- 扫描service包下所有使用注解的类型 -->
+    <!--<context:component-scan base-package="com.uniledger.contract.service" />-->
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 可通过注解控制事务 -->
+    <tx:annotation-driven />
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!-- 配置druid监控spring jdbc -->
+    <bean id="druid-stat-interceptor"
+          class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor"/>
+
+    <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+          scope="prototype">
+        <property name="patterns">
+            <list>
+                <value>spring.druid.service.*</value>
+            </list>
+        </property>
+    </bean>
+    <aop:config>
+        <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut"/>
+    </aop:config>
+
+</beans>

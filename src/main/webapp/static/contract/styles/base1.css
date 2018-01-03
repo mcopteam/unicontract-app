@@ -1,0 +1,787 @@
+* {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+body,
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.tabs {
+	width: 100px;
+	padding: 10px 0px;
+	height: 100%;
+	z-index: 9999999;
+	position: absolute;
+	left: 0;
+	top: 39px;
+	background: #303643;
+}
+
+.tabs li {
+	font-size: 14px;
+	text-align: center;
+	/*background: #ff8922;*/
+	width: 100%;
+	display: block;
+	cursor: pointer;
+	margin-top: 10px;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+}
+
+.tabs li span{
+	margin-right: 5px;
+}
+
+.tabs .cur,
+.con_list .cur {
+	background: #3e5062;
+	border-left: 5px solid #ff8922;
+}
+
+.addMenu .cur{
+	color: #fff;
+	background: #3e5062;
+    border-bottom: 3px solid #ff8922;
+	
+}
+.con_nav {
+	height: 40px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #303643;
+}
+
+.con_nav li {
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	margin: 0 10px;
+	cursor: pointer;
+	color: #d4d4d5;
+}
+
+.con_nav li:nth-child(1) a {
+	text-decoration: none;
+	color: #d4d4d5;
+}
+
+.con_nav .open>a {
+	background-color: #d4d4d5;
+}
+
+.personal {
+	height: 30px;
+}
+
+.manage {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	/*position: absolute;*/
+	padding-left: 101px;
+	/*top: 40px;*/
+	margin-top: 40px;
+	z-index: 99999;
+	overflow: hidden;
+	display: none;
+}
+
+.con,
+.con2 {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.con_l {
+	position: relative;
+	padding: 20px;
+	float: left;
+	width: 64%;
+	height: 81%;
+	overflow: auto;
+}
+
+.con_r {
+	border-left: 2px solid #d1c0d8;
+	padding: 20px;
+	float: left;
+	width: 36%;
+	height: 100%;
+}
+
+.page,
+.page2,
+.page3,
+.page4 {
+	overflow: auto;
+	padding: 5px;
+	width: 100%;
+	height: 400px;
+	margin-left: 20px;
+	margin-top: 20px;
+	/*border: 1px solid #666;*/
+}
+
+.page4 {
+	padding: 40px 0 0 40px;
+	display: none;
+}
+
+.con_tab ul {
+	margin: 0;
+}
+
+.con_tab ul {
+	height: 30px;
+	border-bottom: 2px solid #9397a0;
+}
+
+.con_tab ul li {
+	float: left;
+	width: 80px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.manage table {
+	border: none;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.manage td,
+.manage th {
+	font-size: 15px;
+	border: none;
+	/*width: 20%;*/
+	vertical-align: middle;
+	text-align: center;
+}
+.con2 th:nth-child(1){
+    width: 87px;
+}
+.con2 th:nth-child(2){
+    width: 69px;
+}
+.con2 th:nth-child(3){
+    width: 143px;
+}
+.con2 th:nth-child(4){
+    width: 143px;
+}
+.con2 th:nth-child(5){
+    width: 64px;
+}
+.con2 th:nth-child(6){
+    width: 54px;
+}
+.con2 th:nth-child(7){
+    width: 82px;
+}
+.con2 th:nth-child(8){
+    width: 54px;
+}
+/*.con2 td,*/
+/*.con2 th {*/
+    /*text-align: center;*/
+	/*width: 10%;*/
+/*}*/
+
+/*.con2 td:nth-child(3),*/
+/*.con2 th:nth-child(3) {*/
+	/*width: 15%;*/
+/*}*/
+
+/*.con2 td:nth-child(5),*/
+/*.con2 th:nth-child(5) {*/
+	/*width: 15%;*/
+/*}*/
+
+/*.manage td {*/
+	/*font-size: 16px;*/
+/*}*/
+
+.export {
+	position: absolute;
+	right: 10px;
+	top: 500px;
+}
+
+.btns {
+	width: 100%;
+}
+
+.btn_l {
+	float: left;
+    margin-bottom: 15px;
+}
+.btn_l input{
+    width:200px;
+    height:28px;
+}
+
+.btn_r {
+	float: right;
+}
+
+.p_con {
+	overflow: auto;
+}
+
+.p_con h2 {
+	text-align: center;
+}
+
+.page .p_con p {
+	text-indent: 2em;
+}
+
+.page_btn {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.page p,
+.page3 p {
+	margin-bottom: 10px;
+}
+
+.page,
+.page2,
+.page3 {
+	height: 75%;
+}
+
+.page2 {
+	display: none;
+}
+
+.con2 {
+	display: none;
+}
+
+.page2 p,
+.page4 p {
+	margin: 0;
+}
+
+.last button {
+	margin: 10px 60px 0;
+	display: block;
+	text-align: center;
+}
+
+.personal li a {
+	padding: 10px;
+}
+
+.key {
+	text-align: center;
+}
+
+.con_nav {
+	width: 100%;
+}
+
+.con_nav>li {
+	float: right;
+}
+
+.con_nav>li:nth-child(1) {
+	float: left;
+}
+
+.con_nav a {
+	color: #d4d4d5;
+}
+
+.badge {
+	background-color: #e60202;
+	position: absolute;
+	right: 0;
+	top: -10px;
+}
+
+.glyphicon-search {
+	cursor: pointer;
+}
+
+.file_body {
+	padding: 30px;
+	padding-left: 100px;
+	width: 100%;
+	height: 90%;
+	background: #fff;
+	margin-top: 40px;
+	z-index: 99999;
+	overflow: auto;
+	display: block;
+}
+
+.transfer_body {
+	padding: 20px;
+	padding-right: 0;
+	padding-left: 100px;
+	width: 100%;
+	height: 94%;
+	background: #fff;
+	margin-top: 20px;
+	z-index: 99999;
+	overflow: auto;
+	display: block;
+}
+.electricity_body {
+	padding: 20px;
+	padding-right: 0;
+	padding-left: 100px;
+	width: 100%;
+	height: 94%;
+	background: #fff;
+	margin-top: 20px;
+	z-index: 99999;
+	overflow: auto;
+	display: block;
+}
+
+.file_body table {
+	margin-left: 60px;
+	margin-top: 20px;
+}
+
+.file_body td,
+.file_body th {
+	text-align: center;
+	font-size: 16px;
+	height: 30px;
+	/*width: 200px;*/
+}
+
+.properties td textarea {
+	width: 90% !important;
+}
+
+.geDialog div:nth-child(2) button {
+	width: 168px !important;
+}
+
+.geDialog div:nth-child(3) {
+	margin-right: 31px;
+}
+
+.geDialog {
+	padding: 10px !important;
+	width: 420px !important;
+}
+
+hr {
+	border-color: #333;
+}
+
+.con3 {
+	/*display: none;*/
+	width: 600px;
+	height: 500px;
+	margin: 50px auto;
+	z-index: 999999;
+}
+
+.c {
+	text-align: center;
+}
+
+.tables {
+	margin: 10px auto;
+}
+
+.tables th,
+.tables td {
+	width: 80px;
+	text-align: center;
+}
+
+.page_title {
+	margin-top: 10px;
+}
+
+.page_p {
+	text-align: left;
+}
+
+.page_p p {
+	text-indent: 2em;
+}
+
+.problem {
+	width: 100%;
+}
+
+.problem th,
+.problem td {
+	text-align: center;
+	width: 50%;
+}
+
+.geDialog {
+	z-index: 9999999 !important;
+}
+
+.geMenubarContainer {
+	display: none;
+}
+
+.addMenu {
+	margin-left: 20px;
+	width: 100%;
+	overflow: hidden;
+	border-bottom: 2px solid #000066;
+}
+
+.addMenu li {
+	text-align: center;
+	line-height: 30px;
+	width: 80px;
+	height: 30px;
+	color: #3e5062;
+	/*background: #ff8922;*/
+	/*margin: 5px 10px;*/
+	float: left;
+	
+}
+
+.tabpanel tr th,
+.tabpanel th td {
+	width: 25%;
+}
+
+.footer {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #303643;
+	color: #d4d4d5;
+	z-index: 99999999;
+	margin-top: -1px;
+}
+
+.con_list li {
+	background: #ff8922;
+}
+
+
+/*其他样式*/
+
+.page3 .page {
+	overflow: auto;
+	margin: 20px auto;
+	width: 416px;
+	height: 550px;
+	border: 1px solid #0077FF;
+	padding: 15px;
+}
+
+.page3 p,
+.page p {
+	font-size: 14px;
+	margin: 8px 0;
+}
+
+.c {
+	text-align: center;
+}
+
+.l {
+	text-align: left;
+	width: 50%;
+	float: left;
+}
+.con_main .l{
+	width: 100%;
+}
+.r {
+	width: 50%;
+	float: right;
+	text-align: left;
+}
+
+.title,
+.con_main,
+.con_time,
+.con_info,
+.con_des,
+.con_footer {
+	overflow: hidden;
+	padding: 10px;
+	margin-bottom: 10px; 
+}
+
+.title>p{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.con_main,
+.con_time,
+.con_des{
+	font-weight: bold;
+	background: #f2f6fa;
+} 
+
+.con_main .owner{
+	word-break: break-word;
+}
+
+.con_info>p{
+	color: #777;
+}
+
+.con_des_main {
+	padding-left: 40px;
+}
+
+.con_footer p{
+	font-size: 15px;
+	font-weight: bold;
+	word-break:break-word;
+}
+
+#t {
+	width: 180px;
+	height: 30px;
+}
+
+.s1 {
+	background-color: #e7edf7;
+}
+
+.logo {
+	z-index: 100000;
+	float: left;
+}
+
+.logo img {
+	display: inline-block;
+	height: 30px;
+}
+
+.smallBtn {
+	padding: 0;
+}
+
+.file_list tr th:nth-child(1) {
+	width: 40px;
+}
+
+.file_list tr th:nth-child(2) {
+	width: 161px;
+}
+
+.file_list tr th:nth-child(3) {
+	width: 193px;
+}
+
+.file_list tr th:nth-child(4) {
+	width: 160px;
+}
+
+.file_list tr th:nth-child(5) {
+	width: 80px;
+}
+
+.file_list tr th:nth-child(6) {
+    width: 80px;
+}
+.file_list tr th:nth-child(7) {
+	width: 120px;
+}
+.file_list tr th:nth-child(8) {
+    width: 110px;
+}
+
+.file_list1 tr td:nth-child(1) {
+	width: 40px;
+}
+
+.file_list1 tr td:nth-child(2) {
+	width: 160px;
+}
+
+.file_list1 tr td:nth-child(3) {
+	width: 100px;
+}
+
+.file_list1 tr td:nth-child(4) {
+	width: 160px;
+}
+
+.file_list1 tr td:nth-child(5) {
+	width: 80px;
+}
+
+.file_list1 tr td:nth-child(6) {
+	width: 60px;
+}
+
+.file_list1 tr td:nth-child(7) {
+	width: 60px;
+}
+.file_list1 tr td:nth-child(8) {
+	width: 113px;
+}
+.file_list1 tr td:nth-child(9) {
+	text-align: right;
+	width: 60px;
+}
+
+.pers {
+	color: #333 !important;
+}
+
+.btn_person {
+	border: none;
+	padding: 0;
+	margin-left: -3px;
+	margin-top: -4px;
+}
+
+#logout {
+	color: #333;
+	font-size: 14px;
+}
+.help{
+	color: #333;
+	font-size: 14px;
+}
+.menus .help span{
+	color: #333;
+}
+.menus .help a{
+	display: inline-block !important;
+	padding: 0;
+ }
+.menus .help a:hover{
+	color: #333;
+	background: #d4d4d5;
+}
+.all_list1 {
+	margin-top: 50px;
+}
+
+.menus li:hover,
+.btn_person:hover,
+.menus li:hover .btn_person {
+	background: #d4d4d5;
+}
+
+.log_view {
+	color: #fff;;
+	height: 82%;
+	display: block;
+	margin-top: 50px;
+	margin-left: 110px;
+	margin-right: 10px;
+	overflow: auto;
+}
+
+.son-log {
+	font-size: 12pt;
+	margin-top: 5px;
+	/*text-indent: 2rem;*/
+	/*margin-left: 5px;*/
+	padding-left: 5px;
+}
+
+.son-log2 {
+    font-size: 12pt;
+    margin-top: 5px;
+    /*text-indent: 2rem;*/
+    /*margin-left: 5px;*/
+    padding-left: 5px;
+}
+
+table button{
+    height:30px;
+}
+table tr{
+    height: 35px;
+}
+.transfer_body{
+	display: none;
+}
+.log_view{
+	display: none;
+}
+
+.log_con p>span:nth-child(1){
+	margin-right: 10px;
+	font-size: 20px;
+}
+.log_con p>span:nth-child(2){
+	font-size: 18px;
+	line-height: 30px;
+}
+.page4 p>span:nth-child(1){
+	margin-right: 10px;
+	font-size: 20px;
+}
+.page4 p>span:nth-child(2){
+	font-size: 18px;
+	line-height: 30px;
+}
+.box{
+	width: 600px;
+	height: 170px;
+	padding: 10px 0;
+	box-shadow: 0 5px 15px rgba(0,0,0,.5);
+	position: absolute;
+	left: 50%;
+	top: 50px;
+	margin-left: -300px;
+	border-radius: 6px;
+	background: #fff;
+}
+.box h1{
+	font-size: 20px;
+	line-height: 30px;
+	border-bottom: 1px solid #ccc;
+	padding-left: 20px;
+}
+.btn_select{
+	padding-top: 20px;
+	text-align: center;
+}
+.btn_select span{
+	margin-right: 10px;
+}
+.btn_b{
+	border-top: 1px solid #ccc;
+	text-align: center;
+	padding-top: 20px;
+	margin-top: 20px;
+	padding: 5px 0;
+}
+.btn_b button{
+	margin: 0 10px;
+}
+.log_view1,.log_view2{
+	overflow: auto;
+	background: #000;
+	height: 49%;
+}
+.log_view2{
+	margin-top: 10px;
+}

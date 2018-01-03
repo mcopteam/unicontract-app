@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uniledger.contract.dao.ContractMapper">
+    <resultMap id="localContractMap" type="com.uniledger.contract.model.LocalContract">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name"  jdbcType="VARCHAR"/>
+        <result property="contractId" column="contract_id"  jdbcType="VARCHAR"/>
+        <!--<result column="execute_time" property="executeTime" jdbcType="DATE" javaType="java.util.Date"/>-->
+        <result property="executeStatus" column="execute_status"  jdbcType="TINYINT"/>
+        <result property="status" column="status"  jdbcType="TINYINT"/>
+        <result property="suggestion" column="suggestion" jdbcType="VARCHAR"/>
+        <result property="executeTime" column="execute_time" jdbcType="DATE" javaType="java.sql.Timestamp"/>
+        <result property="caption" column="caption"  jdbcType="VARCHAR"/>
+        <result property="contractContent" column="contract_content"  jdbcType="VARCHAR"/>
+        <result property="autoContractContent" column="auto_contract_content"  jdbcType="VARCHAR"/>
+        <result property="jsonContract" column="json_contract"  jdbcType="VARCHAR"/>
+        <result property="owner" column="owner_pubkey" jdbcType="VARCHAR"/>
+        <result property="publishUser" column="publish_user" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time"  jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="createUserName" column="create_user_name"  jdbcType="VARCHAR" />
+        <result property="updateTime" column="update_time"  jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="updateUserName" column="update_user_name"  jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <insert id="createFileContract" parameterType="LocalContract" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO contract(name, execute_status,contract_id, status, owner_pubkey, auto_contract_content, contract_content, publish_user, create_time, create_user_id, create_user_name)
+        VALUES(#{name}, #{executeStatus},#{contractId}, #{status}, #{owner}, #{autoContractContent,jdbcType=VARCHAR}, #{contractContent,jdbcType=VARCHAR}, #{publishUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId}, #{createUserName})
+    </insert>
+
+    <select id="getLatelyContract" parameterType="string" resultMap="localContractMap">
+        SELECT * FROM contract WHERE contract.owner_pubkey LIKE CONCAT(CONCAT('%',#{pubkey},'%'))
+        ORDER BY id desc
+    </select>
+
+    <select id="getFileContract" parameterType="long" resultMap="localContractMap">
+        SELECT * FROM contract where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="long" >
+        DELETE FROM contract where id = #{id}
+    </delete>
+
+    <select id="getFileContractByContractId" parameterType="string" resultMap="localContractMap">
+        SELECT * FROM contract where contract_id = #{contractId}
+    </select>
+
+
+    <select id="getFileContractList" resultMap="localContractMap">
+        SELECT * FROM contract
+        <where>
+            <if test='contractId !=null and ""!=contractId'>AND contract_id like "%"#{contractId}"%"</if>
+            <if test='name !=null and ""!=name'>AND name like "%"#{name}"%"</if>
+            <if test="status !=null and status.length!=0">
+                AND status in
+                <foreach collection="status" item="statusVal" index="index" open="(" close=")" separator=",">
+                    #{statusVal}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getLocalContractByIdAndOwnerKey" resultMap="localContractMap">
+        SELECT * FROM contract where id = #{id} AND find_in_set(#{owner}, owner_pubkey)
+    </select>
+
+    <select id="getFileContractListByNameAndOwner" resultMap="localContractMap">
+        SELECT * FROM contract
+        <where>
+            <if test='name !=null and ""!=name'>AND name like "%"#{name}"%"</if>
+            <if test='owner !=null and ""!=owner'>AND owner_pubkey like "%"#{owner}"%"</if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+
+    <update id="updateLocalContract" parameterType="LocalContract" >
+        UPDATE contract
+        <trim prefix="set" suffixOverrides=",">
+            <if test="updateTime !=null">update_time=#{updateTime},</if>
+            <if test='suggestion!=null'>suggestion=#{suggestion},</if>
+            <if test="updateUserId !=null">update_user_id=#{updateUserId},</if>
+            <if test='updateUserName!=null and ""!=updateUserName'>update_user_name=#{updateUserName},</if>
+            <if test='contractContent!=null and ""!=contractContent'>contract_content=#{contractContent},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test='jsonContract!=null and ""!=jsonContract'>json_contract=#{jsonContract},</if>
+            <if test='publishUser!=null and ""!=publishUser'>publish_user=#{publishUser},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateLocalContractStatus" >
+        UPDATE contract SET status =#{status} WHERE id=#{id}
+    </update>
+
+
+
+    <select id="getAllLocalContract" resultMap="localContractMap">
+        SELECT * FROM contract
+    </select>
+
+    <select id="getLocalContractById" parameterType="string" resultMap="localContractMap">
+        SELECT * FROM contract where contract_id =#{contractId}
+    </select>
+
+    <select id="getLocalContractByOwnerAndContractId" resultMap="localContractMap">
+        select * from contract c
+        <where>
+            <if test='contractId !=null and ""!=contractId'>
+                AND c.contract_id =#{contractId}
+            </if>
+            <if test='owner !=null and ""!=owner'>
+                AND find_in_set(#{owner}, c.owner_pubkey)
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getUserAllLocalContract" resultMap="localContractMap">
+        select * from contract where contract.owner_pubkey LIKE CONCAT(CONCAT('%',#{pubkey},'%'));
+    </select>
+
+</mapper>

@@ -1,0 +1,368 @@
+.geToolbarContainer {
+	top: 39px !important;
+}
+
+.geSidebarContainer {
+	top: 73px !important;
+}
+
+div.geSidebarContainer {
+	width: 300px !important;
+}
+
+.geHsplit {
+	top: 114px !important;
+}
+
+.geSidebar input {
+	width: 67% !important;
+}
+
+.geMenubarContainer {
+	display: none;
+}
+
+.geDiagramContainer {
+	top: 73px !important;
+}
+
+.geDialog div:nth-child(2) button {
+	width: 168px !important;
+}
+
+.geDialog div:nth-child(3) {
+	margin-right: 31px;
+}
+
+.geDialog {
+	padding: 10px !important;
+	width: 420px !important;
+}
+
+.personal {
+	height: 29px;
+}
+
+.personal>li a {
+	padding: 10px;
+}
+
+.dropdown-menu li {
+	padding: 0px 20px;
+}
+
+.key th,
+.key td {
+	text-align: center;
+}
+
+.page3 {
+	overflow: auto;
+	padding: 5px;
+	width: 100%;
+	height: 400px;
+	margin-left: 20px;
+	margin-top: 20px;
+	/*border: 1px solid #666;*/
+}
+
+.page3 p {
+	margin-bottom: 10px;
+}
+
+.c {
+	text-align: center;
+}
+
+.p_con {
+	overflow: auto;
+}
+
+.p_con h2 {
+	text-align: center;
+}
+
+.page .p_con p {
+	text-indent: 2em;
+}
+
+.tables {
+	margin: 10px auto;
+}
+
+.tables th,
+.tables td {
+	width: 80px;
+	text-align: center;
+}
+
+.page_p {
+	text-align: left;
+}
+
+.page_p p {
+	text-indent: 2em;
+}
+
+.page3 .page {
+	overflow: auto;
+	margin: 20px auto;
+	width: 416px;
+	height: 550px;
+	border: 1px solid #0077FF;
+	padding: 15px;
+}
+
+.page3 p,
+.page p {
+	font-size: 14px;
+	margin: 8px 0;
+}
+
+.c {
+	text-align: center;
+}
+
+.l {
+	text-align: left;
+	width: 50%;
+	float: left;
+}
+
+.r {
+	width: 50%;
+	float: right;
+	text-align: left;
+}
+
+.title,
+.con_main,
+.con_time,
+.con_info,
+.con_des,
+.con_footer {
+	overflow: hidden;
+	padding: 10px;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+.con_main .l{
+	width: 100%;
+}
+.title>p{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.con_main,
+.con_time,
+.con_des{
+	font-weight: bold;
+	background: #f2f6fa;
+} 
+
+.con_main .owner{
+	word-break: break-word;
+}
+
+.con_info>p{
+	color: #777;
+}
+
+.con_footer p{
+	font-size: 15px;
+	font-weight: bold;
+	word-break:break-word;
+}
+
+.con_des_main {
+	padding-left: 40px;
+}
+
+#t {
+	width: 180px;
+	height: 30px;
+}
+
+
+/*其他*/
+
+.pers {
+	color: #333 !important;
+}
+
+.btn_person {
+	border: none;
+	padding: 0;
+	margin-left: -3px;
+	margin-top: -4px;
+}
+
+#logout {
+	color: #333;
+	font-size: 14px;
+}
+
+.con_nav {
+	background: #303643;
+	height: 40px;
+}
+
+.con_nav li {
+	color: #d4d4d5;
+	line-height: 40px;
+	padding: 0 10px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.logo {
+	z-index: 100000;
+}
+
+.logo a {
+	line-height: 40px;
+	text-decoration: none;
+	color: #d4d4d5;
+	font-size: 16px;
+	margin-left: 10px;
+}
+
+.logo img {
+	display: inline-block;
+	height: 30px;
+}
+
+.wo {
+	float: right !important;
+}
+
+.wo a {
+	color: #d4d4d5;
+}
+
+#newcontract_title {
+	text-decoration: underline;
+	color: #ff8922;
+}
+
+.dropdown_l a {
+	color: #d4d4d5;
+	background: none;
+}
+
+.dropdown_l .dropdown-menu li {
+	color: #333 !important;
+	line-height: 40px;
+	padding: 0 10px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover,
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+	background: none;
+}
+
+.nav-tabs>li>a:hover,
+.nav>li>a:focus,
+.nav>li>a:hover {
+	background: none;
+}
+
+.img {
+	overflow: hidden;
+	width: 450px;
+	height: 400px;
+	float: left;
+	margin-left: 5px;
+	border: 1px dashed #ccc;
+	margin-top: 20px;
+}
+
+.menus li:hover,
+.btn_person:hover,
+.menus li:hover .btn_person {
+	background: #d4d4d5;
+}
+
+.hov:hover {
+	background: #ccc;
+	color: #303643;
+}
+
+.ml {
+	margin-left: 5px;
+}
+
+.problem tr th:nth-child(1),
+.problem tr td:nth-child(1),
+.problem1 tr th:nth-child(1),
+.problem1 tr td:nth-child(1),
+.problem3 tr th:nth-child(1),
+.problem3 tr td:nth-child(1),
+.problem2 tr th:nth-child(1),
+.problem2 tr td:nth-child(1) {
+	text-align: center;
+	width: 150px;
+}
+
+.problem tr th:nth-child(2),
+.problem tr td:nth-child(2),
+.problem1 tr th:nth-child(2),
+.problem1 tr td:nth-child(2),
+.problem2 tr th:nth-child(2),
+.problem2 tr td:nth-child(2),
+.problem3 tr th:nth-child(2),
+.problem3 tr td:nth-child(2) {
+	text-align: center;
+	width: 450px;
+}
+
+.arrow_box {
+	position: relative;
+	background: #88b7d5;
+	border: 2px solid #88b7d5;
+}
+.arrow_box:after, .arrow_box:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-top-color: #88b7d5;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-top-color: #88b7d5;
+	border-width: 12px;
+	margin-left: -12px;
+}
+.help{
+	color: #333;
+	font-size: 14px;
+}
+.menus .help span{
+	color: #333;
+}
+.menus .help a{
+	display: inline-block !important;
+	padding: 0;
+}
+.menus .help a:hover{
+	color: #333;
+	background: #d4d4d5;
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>智能合约平台帮助文档</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="bot/bootstrap.min.css" />
+		<script src="bot/jquery-1.11.3.js"></script>
+		<script src="bot/bootstrap.js"></script>
+		<style>
+			.list div{
+				width: 800px;
+			}
+			.list .dobule img{
+				display: inline-block;
+				width: 49%;
+			}
+			.list p{
+				display: block;
+				text-indent: 2rem;
+			}
+			.con{
+				margin-top: 80px;
+				padding-bottom: 100px;
+			}
+			.container h1 span{
+				font-size: 16px;
+			}
+			.container a{
+				color: #000000;
+				text-decoration: none;
+			 }
+			.footer{
+				padding-top: 20px;
+				margin-bottom: 0;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<a href="login.html"><h1>智能合约平台帮助文档<span>v1.0</span></h1></a>
+			</div>
+		</nav>
+		<div class="container con">
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingOne">
+						<h4 class="panel-title">
+					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					         	合约设计者
+					        </a>
+					     </h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-body">
+							<div class="list">
+								<h3>登录后界面：</h3>
+								<div class="center-block">
+									<img src="images/help/image001.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+							<div class="list">
+								<h3>新建合约：</h3>
+								<p><b>操作步骤：</b>文件管理→新建合约→输入文件名→确定</p>
+								<div class="center-block">
+									<img src="images/help/image003.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+							<div class="list">
+								<h3>合约设计界面：</h3>
+								<p><b>操作步骤：</b>文件管理→新建合约→输入文件名→确定</p>
+								<div class="center-block">
+									<img src="images/help/image005.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<h4>基本构件：</h4>
+								<p><b>开始构件：</b>唯一组件，包含合约主体信息。</p>
+								<p><b>查询构件：</b>执行查询操作，根据不同结果选择不同的分支。</p>
+								<p><b>动作构件：</b>执行合约动作，实现相应的功能。</p>
+								<p><b>决策构件：</b></p>
+								<h4>主面板：</h4>
+								<p>合约设计主界面。</p>
+								<h4>属性面板：</h4>
+								<p>合约及构件属性。</p>
+							</div>
+							<div class="list">
+								<h3>绘制合约：</h3>
+								<p><b>添加构件：</b>点击左侧构件面板，选择所需的构件，单击或拖动其到主面板。</p>
+								<div class="center-block">
+									<img src="images/help/image007.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<p><b>添加连线：</b>鼠标悬停在构件中，出现绿色圆点，点绿色圆点拖拽至要连接的构件。</p>
+								<div class="center-block dobule">
+									<img src="images/help/image009.png" class="img-responsive" alt="Responsive image">
+									<img src="images/help/image010.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<p><b>编辑属性：</b>点击要编辑的构件，在右侧录入对应的属性。</p>
+								<div class="center-block">
+									<img src="images/help/image011.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+							<div class="list">
+								<h3>合约属性：</h3>
+								<p>TODO.</p>
+							</div>
+							<div class="list">
+								<h3>保存合约：</h3>
+								<p><b>操作步骤：</b>合约编辑完成后，点击操作→完成，即可保存</p>
+								<div class="center-block">
+									<img src="images/help/image013.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+							<div class="list">
+								<h3>合约提交：</h3>
+								<p><b>操作步骤：</b>在文件管理界面，找到要提交的合约，点击送审。</p>
+								<div class="center-block">
+									<img src="images/help/image015.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<p>送审之后，即可在合约产品中找到提交的合约，状态为【未审批】</p>
+								<div class="center-block">
+									<img src="images/help/image017.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+							<div class="list">
+								<h3>其他功能：</h3>
+								<p><b>（1）编辑：</b>未完成的合约在可以再次编辑。</p>
+								<div class="center-block">
+									<img src="images/help/image019.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<p><b>（2）另存为xml文件：</b></p>
+								<div class="center-block">
+									<img src="images/help/image021.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<div class="center-block">
+									<img src="images/help/image022.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<p><b>（3）导出图片：</b></p>
+								<div class="center-block">
+									<img src="images/help/image023.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<div class="center-block">
+									<img src="images/help/image024.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<p><b>（4）导入xml</b></p>
+								<div class="center-block">
+									<img src="images/help/image025.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<div class="center-block">
+									<img src="images/help/image026.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingTwo">
+						<h4 class="panel-title">
+					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					          合约审批者
+					        </a>
+					     </h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						<div class="panel-body">
+							<div class="list">
+								<h3>审批：</h3>
+								<p><b>操作步骤：</b>找到要审批的合约点击同意。合约状态变为审批通过。</p>
+								<div class="center-block">
+									<img src="images/help/image028.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<div class="center-block">
+									<img src="images/help/image030.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<p>另外，如果合约有问题，可以点击建议修改，填入建议后，该合约会回到合约设计者手中重新编辑。</p>
+								<p><b>合约预览：</b>选择对应合约后，右侧会出现该合约的文本预览内容。</p>
+								<div class="center-block">
+									<img src="images/help/image032.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+							<div class="list">
+								<h3>发布：</h3>
+								<p><b>操作步骤：</b>找到对应的合约，点击发布选择签名同意合约发布成功。</p>
+								<div class="center-block">
+									<img src="images/help/image034.png" class="img-responsive" alt="Responsive image">
+								</div>
+								<div class="center-block">
+									<img src="images/help/image036.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingThree">
+						<h4 class="panel-title">
+					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					        	普通用户
+					        </a>
+					     </h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+						<div class="panel-body">
+							<div class="list">
+								<h3>签约产品：</h3>
+								<div class="center-block">
+									<img src="images/help/image038.png" class="img-responsive" alt="Responsive image">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar navbar-default footer navbar-fixed-bottom">
+		  <div class="container">
+		  		<p>版权所有 Copyright © 北京大同区块链技术研究院 备案序号：京ICP备16053305号-1</p>
+		  		 <p>最终解释权归北京大同区块链技术研究院所有</p>
+		  </div>
+		</nav>
+	</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>contract-app</display-name>
+
+    <!-- 设置请求编码格式 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!--<async-supported>true</async-supported>-->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--跨域过滤器-->
+    <!--<filter>-->
+        <!--<filter-name>corsFilter</filter-name>-->
+        <!--<filter-class>com.uniledger.contract.filter.CORSFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>corsFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <!--<param-value>classpath:log4j2.properties</param-value>-->
+        <param-value>classpath:log4j2.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>spring-druid.root</param-value>
+    </context-param>
+
+    <!-- 加载配置文件 -->
+    <!-- 不加下面配置会出现 applicationContext FileNotFoundException-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:spring-mvc.xml</param-value>
+    </context-param>
+    <!---->
+    <!-- 配置监听器-->
+    <!-- spring -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 防止Spring内存溢出监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+
+    <!--spring mvc 会默认加载name-servlet.xml文件的信息，在你的web信息中， servlet-name为springMVC，系统会默认加载springMVC-servlet.xml-->
+    <!-- spring mvc -->
+    <servlet>
+        <servlet-name>contract-app</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!--<param-value>classpath:spring-mvc.xml</param-value>--> <!-- error -->
+            <param-value>classpath*:spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>contract-app</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- druid 监控 -->
+    <filter>
+        <filter-name>druidWebStatFilter</filter-name>
+        <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+        <init-param>
+            <param-name>exclusions</param-name>
+            <param-value>
+                /static/*,/assets/*,*.css,*.js,*.gif,*.jpg,*.png,*.ico,*.eot,*.svg,*.ttf,*.woff,*.jsp,*.tpl,/druid/*
+            </param-value>
+        </init-param>
+        <!-- 缺省sessionStatMaxCount是1000个。你可以按需要进行配置 -->
+        <init-param>
+            <param-name>sessionStatMaxCount</param-name>
+            <param-value>1000</param-value>
+        </init-param>
+        <!-- druid 0.2.7版本开始支持profile，配置profileEnable能够监控单个url调用的sql列表 -->
+        <init-param>
+            <param-name>profileEnable</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>druidWebStatFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>druidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>druidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- minutes -->
+    <session-config>
+        <session-timeout>7200</session-timeout>
+    </session-config>
+
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/WEB-INF/error/404.jsp</location>-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+        <!--<error-code>500</error-code>-->
+        <!--<location>/WEB-INF/error/500.jsp</location>-->
+    <!--</error-page>-->
+
+    <!-- web异常页面处理 -->
+    <!--<error-page>-->
+        <!--<exception-type>java.lang.Throwable</exception-type>-->
+        <!--<location>/error_500</location>-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+        <!--<exception-type>java.lang.Exception</exception-type>-->
+        <!--<location>/error_404</location>-->
+    <!--</error-page>-->
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error_400</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error_404</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_404</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error_500</location>
+    </error-page>
+    <error-page>
+        <error-code>501</error-code>
+        <location>/error_500</location>
+    </error-page>
+    <error-page>
+        <error-code>502</error-code>
+        <location>/error_500</location>
+    </error-page>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>index.jsp</welcome-file>-->
+    <!--</welcome-file-list>-->
+</web-app>

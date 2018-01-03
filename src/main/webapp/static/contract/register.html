@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>登录</title>
+		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="bot/bootstrap.min.css" />
+		<link rel="stylesheet" href="styles/login.css" />
+		<script src="bot/jquery-1.11.3.js"></script>
+		<script src="bot/bootstrap.js"></script>
+	</head>
+	<body class="beg-login-bg ">
+		<ul class="nav nav-tabs">
+			<li class="logo"><span><a href="login.html"><img src="images/img/2.png"/>智能合约管理平台</a></span></li>
+			<li class="login"><a href="login1.html">登录</a></li>
+		</ul>
+		<div class="beg-login-box regbox">
+			<header>
+				<h1>智能合约管理平台注册</h1>
+			</header>
+			<div class="beg-login-main">
+				<!--<form class="layui-form" >-->
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+                        <i class="layui-icon">&#xe612;</i>
+                    </label>
+					<input type="text" placeholder="这里输入登录名" class="layui-input" id="names">
+				</div>
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+                        <i class="layui-icon">&#xe642;</i>
+                    </label>
+					<input type="password" placeholder="这里输入密码" class="layui-input" id="passwords">
+				</div>
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+                        <i class="layui-icon">&#xe642;</i>
+                    </label>
+					<input type="password" placeholder="这里输入邮箱地址" class="layui-input" id="email">
+				</div>
+				<div class="layui-form-item">
+					<div class="beg-pull-right" style="width:100%;margin-top:0px;">
+						<button class="layui-btn layui-btn-primary" style="width:100%" id="register" onclick="alert('注册功能尚未开启！')">
+                            <i class="layui-icon">&#xe650;</i> 注册
+                        </button>
+					</div>
+					<div class="beg-clear"></div>
+				</div>
+				<!--</form>-->
+			</div>
+		</div>
+		<footer class="footer navbar navbar-default navbar-fixed-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-md-9 footer-left" style="padding-top: 30px;">
+						<p>版权所有 Copyright © 北京大同区块链技术研究院 备案序号：京ICP备16053305号-1</p>
+						<p>联系我们：010-59513370</p>
+					</div>
+					<div class="col-sm-12 col-md-3 footer-right">
+						<img src="images/img/echo.jpg" class="img-responsive" alt="Responsive image" style="width: 100px; height: 100px;"/>
+						<p style="text-align: center; width: 100px;">扫描关注公众号</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

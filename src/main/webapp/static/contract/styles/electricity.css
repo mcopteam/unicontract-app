@@ -1,0 +1,175 @@
+.electricity_body>div{
+	width: 100%;
+	height: 100%;
+}
+.electricity_body>div .row{
+	height: 100%;
+}
+.row>div{
+	height: 100%;
+	padding-right: 0;
+	padding-left: 0;
+}
+.electricity_body h1{
+	font-weight: bold;
+}
+.electricity_left{
+	border-right: 1px solid #d1c0d8;
+	height: 100%;
+	padding: 20px;
+}
+.electricity_left h1,.electricity_right h1{
+	font-size: 20px;
+	line-height: 30px;
+}
+.electricity_type{
+	padding: 10px;
+}
+.electricity_type_once{
+	padding: 0 10px;
+}
+.electricity_type_once p{
+	line-height: 24px;
+}.electricity_type_once>p{
+	color: #999;
+ }
+
+.electricity_select_pubkey,.electricity_select_data,.electricity_select_amount,.electricity_low_money,.electricity_auto_money,.electricity_select_type,.electricity_select_sign{
+	margin-top: 10px;
+}
+.electricity_select_btn{
+	margin-top: 20px;
+}
+.electricity_select_pubkey span,.electricity_select_data span{
+	text-align: right;
+	width: 60px;
+	display: inline-block;
+	margin-right: 10px;
+}
+.electricity_select_data div{
+	padding-left: 20px;
+	margin-top: 10px;
+}
+.electricity_select_data input{
+	width: 140px;
+}
+.electricity_select_type select{
+	width: 150px;
+}
+.electricity_low_money input,.electricity_auto_money input{
+	color: red;
+	border: none;
+	font-size: 18px;
+	border-bottom:1px solid #ccc;
+	background: none;
+	width: 50px;
+}
+.electricity_low_money_title,.electricity_auto_money_title{
+	color: #8C8C8C;
+	font-size: 12px;
+	padding-left: 100px;
+}
+.electricity_low_money_title{
+	padding-left: 65px;
+}
+.electricity_select_data input{
+	width: 150px;
+}
+.electricity_select_money{
+	height: 100px;
+}
+.electricity_select_money img{
+	margin-left: 10px;
+	width: 80px;
+	height: 80px;
+	float: left;
+}
+.electricity_select_money input{
+	font-size: 50px;
+	border: none;
+	border-bottom:1px solid #ccc;
+	background: none;
+	margin-top: 20px;
+	float: left;
+	width: 50%;
+}
+.electricity_select_btn{
+	text-align: center;
+}
+
+
+
+
+
+.electricity_right{
+	padding: 20px;
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	height: 100%;
+}
+.electricity_right>h1{
+	padding-left: 20px;
+}
+.electricity_contract_list{
+	overflow: auto;
+	padding: 10px;
+	height: 50%;
+	border-bottom: 1px solid #d1c0d8;
+}
+.electricity_list_table th,.electricity_list_table td{
+	width:15%;
+	text-align: center;
+	padding: 0 2px;
+}
+.electricity_contract_show{
+	padding: 10px;
+	padding-top: 0;
+	height: 48%;
+}
+.electricity_contract_show_l{
+	padding: 10px;
+	height: 100%;
+	width: 40%;
+	border-right: 1px solid #d1c0d8;
+	float: left;
+}
+.electricity_contract_show_l div p{
+	float: left;
+}
+.electricity_contract_show_money,.electricity_contract_show_ele{
+	text-align: center;
+	font-size: 40px;
+	line-height: 60px;
+	width: 90%;
+	color: orange;
+}
+.electricity_contract_show_unit{
+	width: 10%;
+	line-height: 60px;
+	text-align: right;
+	font-size: 16px;
+	font-weight: bold;
+}
+.electricity_contract_show_r{
+	overflow: auto;
+	padding: 10px;
+	height: 100%;
+	width: 59%;
+	float: left;
+}
+.electricity_list_log{
+	padding-bottom: 50px;
+	margin-top: 10px;
+}
+.electricity_list_log p>span:nth-child(1){
+	margin-right: 10px;
+	font-size: 20px;
+}
+.electricity_list_log p>span:nth-child(2){
+	font-size: 18px;
+	line-height: 30px;
+}
+.electricity_buy_select{
+	width: 180px;
+}

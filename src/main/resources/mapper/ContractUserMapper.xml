@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uniledger.contract.dao.ContractUserMapper">
+    <resultMap id="contractUserMap" type="com.uniledger.contract.model.ContractUser">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="uniqueId" column="unique_id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="originPassword" column="origin_password" jdbcType="VARCHAR"/>
+        <result property="pubkey" column="pubkey" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="TINYINT"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <resultMap id="contractUserDTOMap" type="com.uniledger.contract.dto.ContractUserDTO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+        <result property="pubkey" column="pubkey" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getAllUser" resultMap="contractUserMap">
+        SELECT * FROM contract_user
+        <where>
+        <if test="id != null">
+            AND id =#{id}
+        </if>
+        <if test='pubkey != null and ""!=pubkey'>
+            AND pubkey like "%"#{pubkey}"%"
+        </if>
+        <if test='name != null and ""!=name'>
+            AND name like "%"#{name}"%"
+        </if>
+        </where>
+    </select>
+
+    <select id="getAllContractUser" resultMap="contractUserMap">
+        SELECT * FROM contract_user
+    </select>
+
+    <select id="getUserListByContractId" parameterType="string" resultMap="contractUserMap">
+        SELECT pubkey,'secret',name,age,phone,create_time,update_time FROM contract_user
+        <where>
+            <if test='contractId != null and ""!=contractId '>
+                AND pubkey REGEXP (
+                SELECT
+                REPLACE (owner_pubkey, ',', '|')
+                FROM
+                contract
+                WHERE
+                contract_id = #{contractId}
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserListByOwnersPubkey" parameterType="string" resultMap="contractUserMap">
+        SELECT * FROM contract_user
+        <where>
+            <if test='ownersPubkey != null and ""!=ownersPubkey'>
+                pubkey in (ownersPubkey)
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserListByOwnersPubkeyList" resultMap="contractUserMap">
+        SELECT * FROM contract_user
+        <where>
+            <if test="ownersPubkeyList != null and ownersPubkeyList.size() > 0 ">
+                pubkey in
+                <foreach collection="ownersPubkeyList" item="item" index="index" open="(" separator="," close=")" >
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserDTOListByOwnersPubkeyList" resultMap="contractUserDTOMap">
+        SELECT * FROM contract_user
+        <where>
+            <if test="ownersPubkeyList != null and ownersPubkeyList.size() > 0 ">
+                pubkey in
+                <foreach collection="ownersPubkeyList" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getUserById" parameterType="long" resultMap="contractUserMap">
+        SELECT * FROM contract_user where id =#{id}
+    </select>
+
+    <select id="getUserByPubkey" parameterType="string" resultMap="contractUserMap">
+        SELECT * FROM contract_user where pubkey like  CONCAT('%','#{pubkey}','%')
+    </select>
+
+    <select id="getUserUsePubkey" parameterType="string" resultMap="contractUserMap">
+        SELECT * FROM contract_user where pubkey=#{pubkey}
+    </select>
+
+    <select id="getUserByContractName" parameterType="string" resultMap="contractUserMap">
+        SELECT * FROM contract_user where name like CONCAT('%','#{contractName}','%')
+    </select>
+
+    <select id="getUserByUserName" parameterType="string" resultMap="contractUserMap">
+        SELECT * FROM contract_user where username =#{username}
+    </select>
+
+    <update id="updateContractUserKeyPair" parameterType="ContractUser" >
+        UPDATE contract_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test='pubkey!=null and ""!=pubkey'>pubkey=#{pubkey},</if>
+            prikey=#{prikey},
+            <if test="updateTime !=null">update_time=#{updateTime},</if>
+            <if test="updateUserId !=null">update_user_id=#{updateUserId},</if>
+            <if test='updateUserName!=null and ""!=updateUserName'>update_user_name=#{updateUserName},</if>
+        </trim>
+        WHERE id =#{id}
+    </update>
+</mapper>

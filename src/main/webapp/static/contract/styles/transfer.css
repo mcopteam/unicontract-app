@@ -1,0 +1,151 @@
+.transfer_body>div{
+	width: 100%;
+	height: 100%;
+}
+.transfer_body>div .row{
+	height: 100%;
+}
+.row>div{
+	height: 100%;
+	padding-right: 0;
+	padding-left: 0;
+}
+.transfer_body h1{
+	font-weight: bold;
+}
+.transfer_left{
+	border-right: 1px solid #d1c0d8;
+	height: 100%;
+	padding: 20px;
+}
+.transfer_left h1,.transfer_right h1{
+	font-size: 20px;
+	line-height: 30px;
+}
+.transfer_type{
+	padding: 10px;
+}
+.transfer_type_once{
+	padding: 0 10px;
+}
+.transfer_type_once p{
+	line-height: 24px;
+}
+.transfer_type_once>p{
+	color: #999;
+ }
+
+.transfer_select_pubkey,.transfer_select_data,.transfer_select_amount,.transfer_select_btn{
+	margin-top: 10px;
+}
+.transfer_select_pubkey span,.transfer_select_data span{
+	text-align: right;
+	width: 60px;
+	display: inline-block;
+	margin-right: 10px;
+}
+.transfer_select_data input{
+	width:140px;
+}
+.transfer_select_amount>span{
+	margin-left: 4px;
+}
+.transfer_select_amount>div{
+	padding-left: 50px;
+}
+.transfer_select_money{
+	height: 100px;
+}
+.transfer_select_money img{
+	margin-left: 10px;
+	width: 80px;
+	height: 80px;
+	float: left;
+}
+.transfer_select_money input{
+	font-size: 50px;
+	border: none;
+	border-bottom:1px solid #ccc;
+	background: none;
+	margin-top: 20px;
+	float: left;
+	width: 50%;
+}
+.transfer_select_btn{
+	text-align: center;
+}
+
+
+
+
+
+.transfer_right{
+	padding: 20px;
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	height: 100%;
+}
+.transfer_right>h1{
+	padding-left: 20px;
+}
+.transfer_contract_list{
+	overflow: auto;
+	padding: 10px;
+	height: 50%;
+	border-bottom: 1px solid #d1c0d8;
+}
+.transfer_list_table th,.transfer_list_table td{
+	width:15%;
+	text-align: center;
+	padding: 0 2px;
+}
+.transfer_contract_show{
+	padding: 10px;
+	padding-top: 0;
+	height: 48%;
+}
+.transfer_contract_show_l{
+	padding: 10px;
+	height: 100%;
+	width: 40%;
+	border-right: 1px solid #d1c0d8;
+	float: left;
+}
+.transfer_contract_show_l div p{
+	float: left;
+}
+.transfer_contract_show_money{
+	text-align: center;
+	font-size: 50px;
+	line-height: 100px;
+	width: 90%;
+	color: orange;
+}
+.transfer_contract_show_unit{
+	width: 10%;
+	line-height: 100px;
+	text-align: right;
+	font-size: 16px;
+	font-weight: bold;
+}
+.transfer_contract_show_r{
+	overflow: auto;
+	padding: 10px;
+	height: 100%;
+	width: 59%;
+	float: left;
+}
+.list_log{
+	margin-top: 10px;
+	padding-bottom: 50px;
+}
+.list_log p>span:nth-child(1){
+	margin-right: 10px;
+	font-size: 20px;
+}
+.list_log p>span:nth-child(2){
+	font-size: 18px;
+	line-height: 30px;
+}
+

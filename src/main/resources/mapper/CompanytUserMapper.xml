@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uniledger.contract.dao.CompanyUserMapper">
+    <resultMap id="companyUserMap" type="com.uniledger.contract.model.CompanyUser">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="nameEn" column="name_en" jdbcType="VARCHAR"/>
+        <result property="no" column="no" jdbcType="INTEGER"/>
+        <result property="pubkey" column="pubkey" jdbcType="VARCHAR"/>
+        <result property="prikey" column="prikey" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <select id="getCompanyUserByCompanyUserPubkey" resultMap="companyUserMap">
+        SELECT * FROM company_user  WHERE pubkey =#{pubkey}
+    </select>
+
+    <select id="getCompanyUserListByCompanyUser" resultMap="companyUserMap">
+        SELECT * FROM company_user
+        <where>
+            <if test="companyUser.id != null">
+                AND id =#{companyUser.id}
+            </if>
+            <if test='companyUser.name != null and ""!=companyUser.name'>
+                AND name like "%"#{companyUser.name}"%"
+            </if>
+            <if test='companyUser.nameEn != null and ""!=companyUser.nameEn'>
+                AND name_en like "%"#{companyUser.nameEn}"%"
+            </if>
+            <if test='companyUser.pubkey != null and ""!=companyUser.pubkey'>
+                AND pubkey like "%"#{companyUser.pubkey}"%"
+            </if>
+            <if test='companyUser.status != null'>
+                AND status =#{companyUser.status}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCompanyUserList" resultMap="companyUserMap">
+        SELECT * FROM company_user
+        <where>
+            <if test="id != null">
+                AND id =#{id}
+            </if>
+            <if test='name != null and ""!=name'>
+                AND name like "%"#{name}"%"
+            </if>
+            <if test='nameEn != null and ""!=nameEn'>
+                AND name_en like "%"#{nameEn}"%"
+            </if>
+            <if test='pubkey != null and ""!=pubkey'>
+                AND pubkey like "%"#{pubkey}"%"
+            </if>
+            <if test="status !=null and status.length !=0">
+                AND status in
+                <foreach collection="status" item="statusVal" index="index" open="(" close=")" separator=",">
+                    #{statusVal}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getCompanyUser" resultMap="companyUserMap">
+        SELECT *
+        FROM company_user
+        WHERE id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,601 @@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>智能合约平台</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="bot/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="styles/base1.css" />
+		<link rel="stylesheet" type="text/css" href="bot/layui.css">
+		<link rel="stylesheet" type="text/css" href="bot/css/modules/laydate/laydate.css" />
+		<link rel="stylesheet" type="text/css" href="styles/transfer.css" />
+		<link rel="stylesheet" type="text/css" href="styles/electricity.css" />
+		<!--引用其他js库-->
+		<script src="bot/jquery-1.11.3.js"></script>
+		<script src="bot/bootstrap.js"></script>
+		<script src="../common/js/utils/moment.min.js"></script>
+		<script type="text/javascript" src="bot/layui.js"></script>
+		<script type="text/javascript" src="bot/lay/modules/laydate.js"></script>
+		<!--index页面引用js-->
+		<script type="text/javascript" src="js/Init.js"></script>
+		<script src="../common/js/encrypt/base/base64.min.js"></script>
+		<script src="../common/js/encrypt/base/basex.js" ></script>
+		<script src="../common/js/encrypt/base/base58.js" ></script>
+		<script src="../common/js/encrypt/sha/sha3.js" ></script>
+		<script src="../common/js/utils/moment.min.js" ></script>
+		<script src="../common/js/utils/json-utils.js" ></script>
+		<script src="../common/js/encrypt/ed25519/nacl-fast.min.js"></script>
+		<script src="../common/js/utils/encrypt-ed25519.js"></script>
+		<script src="../common/js/utils/utf8.js"></script>
+		<script src="../common/js/utils/contract-utils.js"></script>
+	</head>
+	<body class="geEditor">
+		<!--左侧导航Start-->
+		<ul class="tabs">
+			<li class="cur"><span class="glyphicon glyphicon-file"></span>文件管理</li>
+			<li><span class="glyphicon glyphicon-th-large"></span>合约产品</li>
+			<li><span class="glyphicon glyphicon-gift"></span>执行合约</li>
+			<li><span class="glyphicon glyphicon-flash"></span>购电设置</li>
+			<li><span class="glyphicon glyphicon-usd"></span>分账管理</li>
+			<li><span class="glyphicon glyphicon-sort"></span>票据管理</li>
+			<li><span class="glyphicon glyphicon-book"></span>账号管理</li>
+			<li><span class="glyphicon glyphicon-oil"></span>资产转移</li>
+			<li><span class="glyphicon glyphicon-sunglasses"></span>log监测</li>
+		</ul>
+		<!--左侧导航Start-->
+		<!--页面bodyStart-->
+		<div class="manage">
+			<!--执行合约bodyStart-->
+			<div class="con">
+				<!--执行合约左侧内容Start-->
+				<div class="con_l">
+					<!--执行合约左侧头部导航Start-->
+					<div class="btns">
+						<div class="btn_l">
+							<input type="search" name="" placeholder="输入名称进行查询" id="querykey" />
+							<span class="glyphicon glyphicon-search " id="querykeybtn"></span>
+						</div>
+					</div>
+					<!--执行合约左侧头部导航End-->
+					<!--执行合约左侧列表内容Start-->
+					<table class="all_list">
+					</table>
+					<!--执行合约左侧列表内容End-->
+				</div>
+				<!--执行合约左侧内容End-->
+				<!--执行合约右侧内容Start-->
+				<div class="con_r">
+					<!--执行合约内容Start-->
+					<div class="page">
+						<div class="title c">
+							<p></p>
+						</div>
+						<div class="con_main c">
+							<div class="l">
+								<p>合约编号：<span></span></p>
+								<div class="owner">
+								</div>
+							</div>
+						</div>
+						<div class="con_time c">
+							<div class="l">
+								<p>合约创建日期：<span></span></p>
+							</div>
+							<div class="r">
+								<p>合约起始日期：<span class="con_time_statr"></span></p>
+								<p>合约截止日期：<span class="con_time_end"></span></p>
+							</div>
+						</div>
+						<div class="con_des">
+							<p>资产描述：</p>
+							<div class="con_des_main">
+								<p>名称：<span class="con_des_name"></span></p>
+								<p>数量：<span class="con_des_num"></span></p>
+								<p>型号：<span class="con_des_type"></span></p>
+							</div>
+						</div>
+						<div class="con_info">
+							<p>合约权利和义务：</p>
+							<div class="con_des_mains">
+							</div>
+						</div>
+						<div class="con_footer">
+							<div class="con_footer_con">
+							</div>
+						</div>
+					</div>
+					<!--执行合约内容End-->
+					<!--执行合约执行日志Start-->
+					<div class="page2" style="position: relative;">
+						<div class="p_con">
+							<h2 style="font-size: 18px; line-height: 44px;">执行日志</h2>
+							<div class="log_con">
+							</div>
+							<div class="modal-footer" style="border: none; position: absolute; bottom: 0; right: 0;">
+								<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModal13">点击查看执行详情</button>
+							</div>
+							<!--点击产看执行详情modal-->
+							<div class="modal fade" id="myModal13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">执行详情</h4>
+										</div>
+										<div class="modal-body">
+											<table class="dd">
+												<tr>
+													<th>事项</th>
+													<th>发生时间</th>
+													<th>操作人</th>
+													<th>操作内容</th>
+												</tr>
+											</table>
+											<table class="dd1">
+											</table>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--执行合约执行日志End-->
+					<div class="page_btn">
+						<input type="button" name="" id="execute" value="执行日志" />
+					</div>
+				</div>
+				<!--执行合约右侧内容End-->
+			</div>
+			<!--执行合约bodyEnd-->
+			<!--审核合约Start-->
+			<div class="con2">
+				<!--审核合约左侧内容Start-->
+				<div class="con_l">
+					<!--审核合约左侧头部导航Start-->
+					<div class="btns">
+						<div class="btn_l">
+							<input type="search" name="" placeholder="输入名称进行查询" id="queryname" />
+							<span class="glyphicon glyphicon-search" id="querynamebtn"></span>
+						</div>
+					</div>
+					<!--审核合约左侧头部导航End-->
+					<!--审核合约左侧列表内容Start-->
+					<table border="2" class="contract">
+					</table>
+					<!--审核合约左侧列表内容End-->
+				</div>
+				<!--审核合约左侧内容End-->
+				<!-- 建议修改Modal -->
+				<div class="modal fade" id="myModal1121" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document" aria-hidden="true">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel121">建议修改</h4>
+							</div>
+							<div class="modal-body" style="text-align: center;">
+								<textarea class="layui-textarea" id="LAY_demo1" style="display: none"></textarea>
+							</div>
+							<div class="modal-footer" style="text-align: center;">
+								<button type="button" class="btn btn-default" data-dismiss="modal" id="suggest_btn" data-type="text">提交</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--审核合约右侧内容Start-->
+				<div class="con_r">
+					<!--审核合约右侧导航Start-->
+					<ul class="addMenu">
+						<li class="cur">合约内容</li>
+						<li>审核记录</li>
+					</ul>
+					<!--审核合约右侧导航End-->
+					<!--审核合约内容Start-->
+					<div class="page3">
+							<div class="title c">
+								<p></p>
+							</div>
+							<div class="con_main c">
+								<div class="l">
+									<p>合约编号：<span></span></p>
+									<div class="owner">
+									</div>
+								</div>
+							</div>
+							<div class="con_time c">
+								<div class="l">
+									<p>合约创建日期：<span></span></p>
+								</div>
+								<div class="r">
+									<p>合约起始日期：<span class="con_time_statr"></span></p>
+									<p>合约截止日期：<span class="con_time_end"></span></p>
+								</div>
+							</div>
+							<div class="con_des">
+								<p>资产描述：</p>
+								<div class="con_des_main">
+									<p>名称：<span class="con_des_name"></span></p>
+									<p>数量：<span class="con_des_num"></span></p>
+									<p>型号：<span class="con_des_type"></span></p>
+								</div>
+							</div>
+							<div class="con_info">
+								<p>合约权利和义务：</p>
+								<div class="con_des_mains">
+								</div>
+							</div>
+							<div class="con_footer">
+								<div class="con_footer_con">
+								</div>
+							</div>
+					</div>
+					<!--审核合约内容End-->
+					<!--审核执行合约Start-->
+					<div class="page4">
+					</div>
+				</div>
+				<!--审核执行合约End-->
+				<!--审核合约右侧内容End-->
+			</div>
+			<!--审核合约End-->
+		</div>
+		<!--页面bodyEnd-->
+		<!--头部导航Start-->
+		<ul class="nav nav-tabs con_nav">
+			<li class="logo"><span><a href="index.html"><img src="images/img/2.png"/>智能合约管理平台</a></span></li>
+			<li role="presentation" class="dropdown" style="z-index: 100000;">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					<span class="glyphicon glyphicon-user"></span>
+				</a>
+				<ul class="dropdown-menu menus">
+					<li class="pers">
+						<span class="glyphicon glyphicon-cog"></span>
+						<button type="button" class="btn btn-default btn_person " data-toggle="modal" data-target="#myModal16" id="keylist">个人设置</button>
+					</li>
+					<li class="help"><span class="glyphicon glyphicon-question-sign"></span><a href="help.html">帮助</a></li>
+					<li id="logout"><span class="glyphicon glyphicon-remove-sign"></span>退出</li>
+				</ul>
+			</li>
+		</ul>
+		<!--头部导航End-->
+		<!--文件管理Start-->
+		<div class="file_body">
+			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal90" style="margin-left: 63px; width: 100px;">+    新建合约</button>
+			<!-- Modal -->
+			<div class="modal fade" id="myModal90" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document" aria-hidden="true">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel90">新建</h4>
+						</div>
+						<div class="modal-body" style="text-align: center;">
+							<span>输入文件名：</span>
+							<input type="text" id="newfilename" />
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" id="new_open">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModalgo" style="margin-left: 100px;">导入合约</button>
+			<div class="modal fade" id="myModal01" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document" aria-hidden="true">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel01">选择</h4>
+						</div>
+						<div class="modal-body" style="text-align: center;">
+							<span>审核人：</span>
+							<select name="我的签名" id="songValue">
+								<option value="mayx">mayx</option>
+								<option value="liy">liy</option>
+								<option value="zhaot">zhaot</option>
+							</select>
+						</div>
+						<div class="modal-footer" style="text-align: center;">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" id="songBtn">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<!--导入合约弹框-->
+			<div class="modal fade" id="myModalgo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document" aria-hidden="true">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">选择本地合约</h4>
+						</div>
+						<div class="modal-body" style="text-align: center;">
+							<input type="file" value="file" id="fileId" style="display: inline-block;" />
+								
+							
+						</div>
+						<div class="modal-footer" style="text-align: center;">
+							<button type="button" class="btn btn-primary" data-dismiss="modal"  id="export">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="myModal02" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document" aria-hidden="true">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel02"><b>修改意见</b>：</h4>
+						</div>
+						<div class="modal-body" style="padding: 20px;">
+							<div>
+								<p class="opinion_inner">1.登录，输入用户名auditor2.进入审核管理界面，可以对发送过来的合约进行审核。左侧为审核合约的列表，右侧显示合约的内容以及审核记录3.点击同意，状态变为已同意，同时发布按钮亮显可使用，建议修改按钮灰显不可用。4.点击发布，弹出选择签名的窗体，进行发布。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<table class="file_list1">
+			</table>
+		</div>
+		<!--文件管理End-->
+		<!--转账管理Start-->
+		<div class="transfer_body">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 col-md-4">
+						<div class="transfer_left">
+							<h1>转账方式</h1>
+							<div class="transfer_type">
+								<div>
+									<input type="checkbox" id="btn_once" value="单次转账" checked="checked"/><label>单次转账</label>
+								</div>
+								<div class="transfer_type_once">
+									<p>设置转账的时间，根据设置的转账信息自动转账。一次设置只完成一次转账。</p>
+									<div class="transfer_select_pubkey">
+										<span>收&nbsp;款&nbsp;人</span>
+										<select id="electricity_receive_select">
+										</select>
+									</div>
+									<div class="transfer_select_data">
+										<span>转账日期</span>
+										<input type="text" name="" id="transfer_data" value="" />
+									</div>
+									<div class="transfer_select_amount">
+										<span>转账金额</span>
+										<div class="transfer_select_money">
+											<img src="images/img/icon_money.png"/>
+											<input type="text" id="transfer_amount"  onkeyup="value=this.value.replace(/\D+/g,'')" />
+										</div>
+									</div>
+									<div class="transfer_select_btn">
+										<button type="button" class="btn btn-primary  " id="transfer_select_btn">确定</button>
+									</div>
+								</div>
+								<div>
+									<input type="checkbox" value="周期转账" disabled="disabled"/><label style="color: #999;">周期转账</label>
+								</div>
+								<div class="transfer_type_round">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8 col-md-8">
+						<div class="transfer_right">
+							<h1>合约记录</h1>
+							<div class="transfer_contract_list">
+								<table class="transfer_list_table">
+								</table>
+							</div>
+							<div class="transfer_contract_show">
+								<div class="transfer_contract_show_l">
+									<h1>账户余额</h1>
+									<div>
+										<p class="transfer_contract_show_money">1000</p>
+										<p class="transfer_contract_show_unit">元</p>
+									</div>
+								</div>
+								<div class="transfer_contract_show_r">
+									<h1>转账记录</h1>
+									<div class="list_log">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--转账管理End-->
+		<!--购电设置Start-->
+		<div class="electricity_body">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 col-md-4">
+						<div class="electricity_left">
+							<h1>购电方式</h1>
+							<div class="electricity_type">
+								<div>
+									<input type="checkbox" id="btn_low" value="最低余额自动购电合约" checked="checked"/><label>最低余额自动购电合约</label>
+								</div>
+								<div class="electricity_type_once">
+									<p>设置最低余额，低于最低余额时，自动充值进行购电。</p>
+									<div class="electricity_select_data">
+										<p>1.当前购电设置的生效期限</p>
+										<div>
+											<span>起始日期:</span>
+											<input type="text" name="" id="electricity_start_data" value="" />
+										</div>
+										<div>
+											<span>结束日期:</span>
+											<input type="text" name="" id="electricity_end_data" value="" />
+										</div>
+									</div>
+									<div class="electricity_low_money">
+										<p>2.电表余额低于<input type="text" id="low_money"   onkeyup="value=this.value.replace(/\D+/g,'')"/>元时，自动购电。</p>
+										<p class="electricity_low_money_title">输入10-100的整数</p>
+									</div>
+									<div class="electricity_auto_money">
+										<p>3.每次自动购电金额为<input type="text" id="auto_money"   onkeyup="value=this.value.replace(/\D+/g,'')"/>元。</p>
+										<p class="electricity_auto_money_title">输入50-500的整数</p>
+									</div>
+									<div class="electricity_select_type">
+										<span>4.自动购电付款方式</span>
+										<select id="electricity_buy_select">
+											<option value="auto">账户托管(完全自动支付)</option>
+											<option value="handle">手工确认(手工确认支付)</option>
+										</select>
+									</div>
+									<div class="electricity_select_sign">
+										<span>5.选择公私钥进行签名</span>
+										<select id="electricity_sign_select">
+										</select>
+									</div>
+									<div class="electricity_select_btn">
+										<button type="button" class="btn btn-primary " id="electricity_select_btn">保存设置</button>
+									</div>
+								</div>
+								<div>
+									<input type="checkbox" value="最低价自动购电合约" disabled="disabled"/><label style="color: #999;">最低价自动购电合约</label>
+								</div>
+								<div>
+									<input type="checkbox" value="就近自动购电合约"  disabled="disabled"/><label style="color: #999;">就近自动购电合约</label>
+								</div>
+								<div class="electricity_type_round">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8 col-md-8">
+						<div class="electricity_right">
+							<h1>购电合约记录</h1>
+							<div class="electricity_contract_list">
+								<table class="electricity_list_table">
+								</table>
+							</div>
+							<div class="electricity_contract_show">
+								<div class="electricity_contract_show_l">
+									<h1>账户余额</h1>
+									<div>
+										<p class="electricity_contract_show_money">0</p>
+										<p class="electricity_contract_show_unit">元</p>
+									</div>
+									<h1>电表余额</h1>
+									<div>
+										<p class="electricity_contract_show_ele">0</p>
+										<p class="electricity_contract_show_unit">元</p>
+									</div>
+								</div>
+								<div class="electricity_contract_show_r">
+									<h1>转账记录</h1>
+									<div class="electricity_list_log">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--购电设置End-->
+		<!--logView-->
+		<div class="log_view" id="logview" >
+			<div class="log_view1">
+
+			</div>
+			<div class="log_view2">
+
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade bs-example-modal-lg" id="myModal16" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 110000;">
+			<div class="modal-dialog modal-lg" role="document" aria-hidden="true">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel16">个人设置</h4>
+					</div>
+					<div class="modal-body">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs personal" role="tablist" style="width: 100%;">
+							<li role="presentation" class="active">
+								<a href="#home" aria-controls="home" role="tab" data-toggle="tab">公私钥管理</a>
+							</li>
+							<li role="presentation">
+								<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">保存设置</a>
+							</li>
+							<li role="presentation">
+								<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">安全设置</a>
+							</li>
+							<li role="presentation">
+								<a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">信息设置</a>
+							</li>
+							<li role="presentation">
+								<a href="#update" aria-controls="update" role="tab" data-toggle="tab">版本更新</a>
+							</li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content" style="margin-top: 50px;">
+							<div role="tabpanel" class="tab-pane active" id="home">
+								<table class="keys" border="2" cellspacing="1" cellpadding="1">
+									<tr>
+										<th style="">名称</th>
+										<th>公钥</th>
+										<th>私钥</th>
+										<th>操作</th>
+									</tr>
+								</table>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default " data-dismiss="modal" data-toggle="modal" data-target="#myModal17">申请公私钥</button>
+									<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="profile">保存设置doing。。。</div>
+							<div role="tabpanel" class="tab-pane" id="messages">安全设置doing。。。</div>
+							<div role="tabpanel" class="tab-pane" id="settings">信息设置doing。。。</div>
+							<div role="tabpanel" class="tab-pane" id="update">版本更新doing。。。</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal17" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 120000;">
+			<div class="modal-dialog" role="document" aria-hidden="true">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel17">申请公私钥</h4>
+					</div>
+					<div class="modal-body" style="text-align: center;">
+						<span>名称：</span>
+						<input type="text" id="applyvalue" value="" placeholder="公私钥1" />
+						<p style="color: #8e7e7e; text-indent: 2em;">名称不可重复，且不可修改</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="apply">申请</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="container">
+				<p>版权所有 Copyright © 北京大同区块链技术研究院 备案序号：京ICP备16053305号-1</p>
+				<p>联系我们：010-59513370</p>
+			</div>
+		</footer>
+		<script src="JavaScript/index_file.js"></script>
+		<script src="JavaScript/index_product.js"></script>
+		<script src="JavaScript/index_execute.js"></script>
+		<script src="JavaScript/index.js"></script>
+		<script src="JavaScript/transfer.js"></script>
+		<script src="JavaScript/electricity.js"></script>
+		<script src="JavaScript/logView.js"></script>
+	</body>
+</html>
